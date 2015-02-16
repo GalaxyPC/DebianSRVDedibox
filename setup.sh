@@ -11,4 +11,7 @@ chmod u+x firewall
 echo "- modification des droits d'execution..."
 cp firewall /etc/init.d/firewall
 echo "Copie vers /etc/init.d/firewall"
+rm -f setup.sh firewall
+echo "- Demarrage du FireWall.."
+service firewall start
 exit 0
