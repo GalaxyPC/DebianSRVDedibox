@@ -67,62 +67,73 @@ $IPT -A OUTPUT -m state ! --state INVALID -j ACCEPT
 echo "- Ne pas casser les connexions établies :" "\033[32m [OK] \033[0m"
 #-------- Regles --------#
 echo "### Debut d'activation des rêgles personalisées ###"
-# On accepte la boucle locale en entrée.
 $IPT -t filter -A INPUT -i lo -j ACCEPT
 $IPT -t filter -A OUTPUT -o lo -j ACCEPT
-# Autoriser le ping (Protocole ICMP)
+echo "- Autorise la boucle locale en entrée :" "\033[32m [OK] \033[0m"
+#
 $IPT -t filter -A INPUT -p icmp -j ACCEPT
 $IPT -t filter -A OUTPUT -p icmp -j ACCEPT
-# Autoriser SSH (Conseil de modif le port ici et dans /etc/ssh/sshd_config !!)
+echo "- Autorise ping :" "\033[32m [OK] \033[0m"
+#
 $IPT -t filter -A INPUT -p tcp --dport 22 -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 22 -j ACCEPT
-# Autoriser DNS
+echo "- Autorise SSH :" "\033[32m [OK] \033[0m"
+#
 $IPT -t filter -A OUTPUT -p tcp --dport 53 -j ACCEPT
 $IPT -t filter -A OUTPUT -p udp --dport 53 -j ACCEPT
 $IPT -t filter -A INPUT -p tcp --dport 53 -j ACCEPT
 $IPT -t filter -A INPUT -p udp --dport 53 -j ACCEPT
-# Autoriser NTP
+echo "- Autorise DNS :" "\033[32m [OK] \033[0m"
+#
 $IPT -t filter -A OUTPUT -p udp --dport 123 -j ACCEPT
-# Autoriser FTP
+echo "- Autorise NTP :" "\033[32m [OK] \033[0m"
+#
 modprobe ip_conntrack_ftp # ligne facultative avec les serveurs OVH
 $IPT -t filter -A INPUT -p tcp --dport 20:21 -j ACCEPT
 $IPT -t filter -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 20:21 -j ACCEPT
-# Autoriser HTTP et HTTPS
+echo "- Autorise FTP :" "\033[32m [OK] \033[0m"
+#
 $IPT -t filter -A OUTPUT -p tcp --dport 80 -j ACCEPT
 $IPT -t filter -A INPUT -p tcp --dport 80 -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 443 -j ACCEPT
 $IPT -t filter -A INPUT -p tcp --dport 443 -j ACCEPT
 $IPT -t filter -A INPUT -p tcp --dport 8443 -j ACCEPT
-# Autoriser SMTP:25
+echo "- Autorise MAILS :" "\033[32m [OK] \033[0m"
+#
 $IPT -t filter -A INPUT -p tcp --dport 25 -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 25 -j ACCEPT
-# Mail POP3:110
+echo "- Autorise SMTP:25 :" "\033[32m [OK] \033[0m"
+#
 $IPT -t filter -A INPUT -p tcp --dport 110 -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 110 -j ACCEPT
-# Mail IMAP:143
+echo "- Autorise POP3:110 :" "\033[32m [OK] \033[0m"
+#
 $IPT -t filter -A INPUT -p tcp --dport 143 -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 143 -j ACCEPT
-# Mail POP3S:995
+echo "- Autorise IMAP:143 :" "\033[32m [OK] \033[0m"
+#
 $IPT -t filter -A INPUT -p tcp --dport 995 -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 995 -j ACCEPT
-# Autoriser Prise en main a distance bureau VNC
+echo "- Autorise POP3S:995 :" "\033[32m [OK] \033[0m"
+#
 # iptables -t filter -A INPUT -p tcp --dport 5901 -j ACCEPT
 # iptables -t filter -A OUTPUT -p tcp --dport 5901 -j ACCEPT
-# Monit
+# echo "- Autorise VNC :" "\033[32m [OK] \033[0m"
 $IPT -t filter -A INPUT -p tcp --dport 8080 -j ACCEPT
+echo "- Autorise Monit:8080 :" "\033[32m [OK] \033[0m"
 # RPS OVH, utile pour disque iSCSI
 # iptables -A OUTPUT -p tcp --dport 3260 -m state --state NEW,ESTABLISHED -j ACCEPT
-echo "- Initialisation des règles :" "\033[32m [OK] \033[0m"
-# Autoriser Shoutcast
+#
 $IPT -t filter -A INPUT -p tcp --dport 8000:8003 -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 8000:8003 -j ACCEPT
 echo "- Shoutcast regles :" "\033[32m [OK] \033[0m"
-# Autorise seedbox
+#
 $IPT -t filter -A INPUT -p tcp --dport 9091 -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 9091 -j ACCEPT
 echo "- SeedBox regles :" "\033[32m [OK] \033[0m"
 #
+echo "- Initialisation des règles :" "\033[32m [OK] \033[0m"
 echo "### Redémarrage de Fail2ban... ###"
 [ -e /etc/init.d/fail2ban ] && /etc/init.d/fail2ban restart
 echo "### Firewall.sh" "\033[32m [OK] \033[0m""###"
