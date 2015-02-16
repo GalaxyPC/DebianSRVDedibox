@@ -74,8 +74,8 @@ $IPT -t filter -A OUTPUT -o lo -j ACCEPT
 $IPT -t filter -A INPUT -p icmp -j ACCEPT
 $IPT -t filter -A OUTPUT -p icmp -j ACCEPT
 # Autoriser SSH (Conseil de modif le port ici et dans /etc/ssh/sshd_config !!)
-$IPT -t filter -A INPUT -p tcp --dport 22 -i $IFACE_INET -j ACCEPT
-$IPT -t filter -A OUTPUT -p tcp --dport 22 -i $IFACE_INET -j ACCEPT
+$IPT -t filter -A INPUT -p tcp --dport 22 -j ACCEPT
+$IPT -t filter -A OUTPUT -p tcp --dport 22 -j ACCEPT
 # Autoriser DNS
 $IPT -t filter -A OUTPUT -p tcp --dport 53 -j ACCEPT
 $IPT -t filter -A OUTPUT -p udp --dport 53 -j ACCEPT
@@ -85,8 +85,8 @@ $IPT -t filter -A INPUT -p udp --dport 53 -j ACCEPT
 $IPT -t filter -A OUTPUT -p udp --dport 123 -j ACCEPT
 # Autoriser FTP
 modprobe ip_conntrack_ftp # ligne facultative avec les serveurs OVH
-$IPT -t filter -A INPUT -p tcp --dport 20:21 -i $IFACE_INET -j ACCEPT
-$IPT -t filter -A INPUT -m state --state ESTABLISHED,RELATED -i $IFACE_INET -j ACCEPT
+$IPT -t filter -A INPUT -p tcp --dport 20:21 -j ACCEPT
+$IPT -t filter -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 20:21 -j ACCEPT
 # Autoriser HTTP et HTTPS
 $IPT -t filter -A OUTPUT -p tcp --dport 80 -j ACCEPT
