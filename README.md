@@ -4,7 +4,7 @@ Script Linux Debian pour serveur hébergé
 Ce script me permet rapidement importer mes regles iptables.
 
 1.INSTALLATION:
-# wget --no-check-certificate https://raw.githubusercontent.com/GalaxyPC/DebianSRVDedibox/664a01703c062cca65daa7a65d4be0a7050609e9/setup.sh
+# wget --no-check-certificate https://raw.githubusercontent.com/GalaxyPC/DebianSRVDedibox/master/setup.sh
 # chmod u+x setup.sh
 # ./setup.sh
 
