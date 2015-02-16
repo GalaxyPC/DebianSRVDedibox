@@ -3,7 +3,7 @@
 # Setup for my Firewall script.
 #
 # Author: Benjamin.COLLEAU@GALAXYPC.fr
-wget --no-check-certificate wget --no-check-certificate https://raw.githubusercontent.com/GalaxyPC/DebianSRVDedibox/master/firewall.sh
+wget --no-check-certificate https://raw.githubusercontent.com/GalaxyPC/DebianSRVDedibox/master/firewall.sh
 cp firewall.sh firewall
 echo "- copie du script en cours..."
 rm -f firewall.sh
