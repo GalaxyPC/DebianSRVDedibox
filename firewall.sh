@@ -11,9 +11,11 @@
 # Provides: firewall.sh
 # Required-Start: $syslog $network $remote_fs
 # Required-Stop: $syslog $network $remote_fs
+# X-Start-Before: networking
+# X-Stop-After: networking
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
-# Short-Description: Start firewall daemon at boot time
+# Short-Description: Start IPTABLES firewall daemon
 # Description: Firewall script.
 ### END INIT INFO
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
@@ -132,6 +134,15 @@ echo "- Shoutcast regles :" "\033[32m [OK] \033[0m"
 $IPT -t filter -A INPUT -p tcp --dport 9091 -j ACCEPT
 $IPT -t filter -A OUTPUT -p tcp --dport 9091 -j ACCEPT
 echo "- SeedBox regles :" "\033[32m [OK] \033[0m"
+#
+# hddtemp En principe cette regles n'est pas obligatoire car j'autorise tous sur interface local plus haut.
+#$IPT -t filter -A INPUT -i lo -p tcp --dport 7634 -j ACCEPT
+#$IPT -t filter -A OUTPUT -o lo -p tcp --dport 7634 -j ACCEPT
+#echo "- HDDTEMP sur local:7634 :" "\033[32m [OK] \033[0m"
+# WEBMIN la poubelle
+# iptables –t filter -A INPUT -p tcp -m tcp --dport 10000 -j ACCEPT
+#
+#
 #
 echo "- Initialisation des règles :" "\033[32m [OK] \033[0m"
 echo "### Redémarrage de Fail2ban... ###"

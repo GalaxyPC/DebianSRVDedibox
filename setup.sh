@@ -3,18 +3,80 @@
 # Setup for my Firewall script.
 #
 # Author: Benjamin.COLLEAU@GALAXYPC.fr
+### Variables couleurs ###
+CSI="\033["
+CEND="${CSI}0m"
+CRED="${CSI}1;31m"
+CGREEN="${CSI}1;32m"
+CYELLOW="${CSI}1;33m"
+CBLUE="${CSI}1;34m"
+CPURPLE="${CSI}1;35m"
+CCYAN="${CSI}1;36m"
+CBROWN="${CSI}0;33m"
+
+ERROR_FILE=./errors.log
+
+####### Verification root ########
+if [[ $EUID -ne 0 ]]; then
+    echo ""
+    echo -e "${CRED}/!\ ERREUR: Vous devez être connecté en tant que root pour pouvoir exécuter ce script.${CEND}" 1>&2
+    echo ""
+    exit 1
+fi
+clear
+########## WAIT ##########
+smallLoader() {
+    echo ""
+    echo ""
+    echo -ne '[ + + +             ] 3s \r'
+    sleep 1
+    echo -ne '[ + + + + + +       ] 2s \r'
+    sleep 1
+    echo -ne '[ + + + + + + + + + ] 1s \r'
+    sleep 1
+    echo -ne '[ + + + + + + + + + ] Appuyez sur [ENTRÉE] pour continuer... \r'
+    echo -ne '\n'
+
+    read
+}
+#######################################################
+
+echo ""
+echo -e "${CCYAN}                          Configuration du script Firewall ${CEND}"
+echo ""
+echo -e "${CCYAN}
+   _____       _                  _____   _____    __      
+  / ____|     | |                |  __ \ / ____|  / _|     
+ | |  __  __ _| | __ ___  ___   _| |__) | |      | |_ _ __ 
+ | | |_ |/ _` | |/ _` \ \/ / | | |  ___/| |      |  _| '__|
+ | |__| | (_| | | (_| |>  <| |_| | |    | |____ _| | | |   
+  \_____|\__,_|_|\__,_/_/\_\\__, |_|     \_____(_)_| |_|   
+                             __/ |                         
+                            |___/                          
+
+${CEND}"
+echo ""
+##########################################################
+echo -e "${CGREEN}-> Téléchargement firewall.sh ${CEND}"
+echo ""
 wget --no-check-certificate https://raw.githubusercontent.com/GalaxyPC/DebianSRVDedibox/master/firewall.sh
-cp firewall.sh firewall
 echo "- copie du script en cours..."
+cp firewall.sh firewall
 rm -f firewall.sh
+echo -e "${CGREEN}-> modification des droits d'execution... ${CEND}"
+echo ""
 chmod u+x firewall
-echo "- modification des droits d'execution..."
-cp firewall /etc/init.d/firewall
 echo "- Copie vers /etc/init.d/firewall"
+cp firewall /etc/init.d/firewall
 rm -f setup.sh firewall
-echo "- Demarrage du FireWall..."
+echo -e "${CGREEN}-> Démarrage du FireWall ${CEND}"
+echo ""
 update-rc.d firewall defaults
 service firewall start
-echo "- STATUS du FireWall:"
+smallLoader
+echo -e "${CCYAN}---------------------------------${CEND}"
+echo -e "${CCYAN}[       STATUS FIREWALL         ]${CEND}"
+echo -e "${CCYAN}---------------------------------${CEND}"
+echo ""
 service firewall status
 exit 0

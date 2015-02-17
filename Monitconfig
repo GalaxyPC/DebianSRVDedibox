@@ -1,0 +1,61 @@
+set daemon  60                         # On vérifie toutes les 60 secondes
+set logfile syslog facility log_daemon
+set mailserver localhost
+set mail-format {
+	from: monit@local
+  subject: [Monit] $HOST - $SERVICE $EVENT
+}
+set alert root@local                     # Destinataire
+set httpd port 8080 and                # Port pour l'accès à l'interface web
+    allow admin:password                # login et mot de passe de connexion
+# Scripts de surveillance des services
+# ClamAV
+check process freshclam with pidfile /var/run/clamav/freshclam.pid
+        group virus
+        start program = "/etc/init.d/clamav-freshclam start"
+        stop  program = "/etc/init.d/clamav-freshclam stop"
+        if 5 restarts within 5 cycles then timeout
+# Apache2
+check process apache with pidfile /var/run/apache2.pid
+group apache
+start program = "/etc/init.d/apache2 start"
+stop program = "/etc/init.d/apache2 stop"
+if failed host www.siteweb.fr port 80
+protocol http then restart
+if 5 restarts within 5 cycles then timeout
+if cpu > 80% for 2 cycles then alert
+if cpu > 90% for 5 cycles then restart
+if children > 250 then restart
+# MySQL
+check process mysqld with pidfile /var/run/mysqld/mysqld.pid  # a adapter au serveur
+group database
+start program = "/etc/init.d/mysql start"
+stop program = "/etc/init.d/mysql stop"
+if failed unix "/var/run/mysqld/mysqld.sock" then restart
+if failed host 127.0.0.1 port 3306 then restart
+if 5 restarts within 5 cycles then timeout
+# SSH
+check process sshd with pidfile /var/run/sshd.pid
+group ssh
+start program "/etc/init.d/ssh start"
+stop program "/etc/init.d/ssh stop"
+if failed host 127.0.0.1 port 1234 protocol ssh then restart
+if 5 restarts within 5 cycles then timeout
+# Postfix
+check process postfix with pidfile /var/spool/postfix/pid/master.pid
+group mail
+start program = "/etc/init.d/postfix start"
+stop  program = "/etc/init.d/postfix stop"
+if failed port 25 protocol smtp then restart
+if 5 restarts within 5 cycles then timeout
+# BIND
+#check process bind9 with pidfile /var/run/named/named.pid
+#group bind
+#start program = "/etc/init.d/bind9 start"
+#stop  program = "/etc/init.d/bind9 stop"
+#if failed port 53 then restart
+#if 5 restarts within 5 cycles then timeout
+# Disk
+check device sda2 with path /dev/sda2
+if space usage > 85% then alert
+group system
