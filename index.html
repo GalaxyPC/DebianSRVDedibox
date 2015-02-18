@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Linux Script IPTABLES Dédibox : Debian Script Firewall pour Serveur hébergé OVH/DEDIBOX/1AND1/GANDI">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Linux Script IPTABLES Dédibox</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/GalaxyPC/DebianSRVDedibox">View on GitHub</a>
+
+          <h1 id="project_title">Linux Script IPTABLES Dédibox</h1>
+          <h2 id="project_tagline">Debian Script Firewall pour Serveur hébergé OVH/DEDIBOX/1AND1/GANDI</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/GalaxyPC/DebianSRVDedibox/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/GalaxyPC/DebianSRVDedibox/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="debiansrvh-berg-" class="anchor" href="#debiansrvh-berg-" aria-hidden="true"><span class="octicon octicon-link"></span></a>DebianSRVH-berg-</h1>
+
+<p><strong>Script Linux Debian pour serveur hébergé</strong>
+<em>Firewall.sh &amp; setup.sh</em>
+Ce script me permet rapidement importer mes règles iptables.</p>
+
+<h2>
+<a id="1installation" class="anchor" href="#1installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.INSTALLATION:</h2>
+
+<p>Vous devez être connecté en tant que root !
+1. # wget --no-check-certificate <a href="https://raw.githubusercontent.com/GalaxyPC/DebianSRVDedibox/master/setup.sh">https://raw.githubusercontent.com/GalaxyPC/DebianSRVDedibox/master/setup.sh</a> 
+2. # chmod u+x setup.sh
+3. # ./setup.sh</p>
+
+<h2>
+<a id="2modification-" class="anchor" href="#2modification-" aria-hidden="true"><span class="octicon octicon-link"></span></a>2.Modification :</h2>
+
+<p>Vous pouvez modifier ensuite les règles dans <strong>/etc/init.d/firewall</strong> avec l'editeur texte que vous preferez.</p>
+
+<h2>
+<a id="3fonctionnement-du-service-firewall" class="anchor" href="#3fonctionnement-du-service-firewall" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.Fonctionnement du service Firewall:</h2>
+
+<p><code># service firewall start|status|stop</code></p>
+
+<h2>
+<a id="4desinstallation-se-fait-en-supprimant-le-script" class="anchor" href="#4desinstallation-se-fait-en-supprimant-le-script" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.Desinstallation se fait en supprimant le script:</h2>
+
+<p><code># service firewall stop &amp;&amp; rm -f /etc/init.d/firewall &amp;&amp; update-rc.d -f firewall remove</code></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Linux Script IPTABLES Dédibox maintained by <a href="https://github.com/GalaxyPC">GalaxyPC</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
