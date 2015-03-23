@@ -28,23 +28,23 @@ clear
 smallLoader() {
     echo ""
     echo ""
-    echo -ne '[ + + +             ] 3s \r'
+    echo '[ + + +             ] 3s \r'
     sleep 1
-    echo -ne '[ + + + + + +       ] 2s \r'
+    echo '[ + + + + + +       ] 2s \r'
     sleep 1
-    echo -ne '[ + + + + + + + + + ] 1s \r'
+    echo '[ + + + + + + + + + ] 1s \r'
     sleep 1
-    echo -ne '[ + + + + + + + + + ] Appuyez sur [ENTRÉE] pour continuer... \r'
-    echo -ne '\n'
+    echo '[ + + + + + + + + + ] Appuyez sur [ENTRÉE] pour continuer... \r'
+    echo '\n'
 
     read
 }
 #######################################################
 
 echo ""
-echo -e "${CCYAN}                          Configuration du script Firewall ${CEND}"
+echo "${CCYAN}                          Configuration du script Firewall ${CEND}"
 echo ""
-echo -e "${CCYAN}
+echo "${CCYAN}
    _____       _                  _____   _____    __      
   / ____|     | |                |  __ \ / ____|  / _|     
  | |  __  __ _| | __ ___  ___   _| |__) | |      | |_ _ __ 
@@ -57,26 +57,28 @@ echo -e "${CCYAN}
 ${CEND}"
 echo ""
 ##########################################################
-echo -e "${CGREEN}-> Téléchargement firewall.sh ${CEND}"
+echo "${CGREEN}-> Téléchargement firewall.sh ${CEND}"
 echo ""
 wget --no-check-certificate https://raw.githubusercontent.com/GalaxyPC/DebianSRVDedibox/master/firewall.sh
 echo "- copie du script en cours..."
 cp firewall.sh firewall
 rm -f firewall.sh
-echo -e "${CGREEN}-> modification des droits d'execution... ${CEND}"
+echo "${CGREEN}-> modification des droits d'execution... ${CEND}"
 echo ""
 chmod u+x firewall
 echo "- Copie vers /etc/init.d/firewall"
 cp firewall /etc/init.d/firewall
 rm -f setup.sh firewall
-echo -e "${CGREEN}-> Démarrage du FireWall ${CEND}"
+echo "- Mise à jour de votre Debian"
+apt-get update && apt-get upgrade --force-yes
+echo "${CGREEN}-> Démarrage du FireWall ${CEND}"
 echo ""
 update-rc.d firewall defaults
 service firewall start
 smallLoader
-echo -e "${CCYAN}---------------------------------${CEND}"
-echo -e "${CCYAN}[       STATUS FIREWALL         ]${CEND}"
-echo -e "${CCYAN}---------------------------------${CEND}"
+echo "${CCYAN}---------------------------------${CEND}"
+echo "${CCYAN}[       STATUS FIREWALL         ]${CEND}"
+echo "${CCYAN}---------------------------------${CEND}"
 echo ""
 service firewall status
 exit 0
