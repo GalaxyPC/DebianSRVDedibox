@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Setup for my Firewall script.
 #
@@ -45,18 +45,17 @@ echo ""
 echo "${CCYAN}                          Configuration du script Firewall ${CEND}"
 echo ""
 echo "${CRED}GALXAYPC.fr@Benjamin COLLEAU${CEND}"
-#echo "${CCYAN}
-#   _____       _                  _____   _____    __      
-#  / ____|     | |                |  __ \ / ____|  / _|     
-# | |  __  __ _| | __ ___  ___   _| |__) | |      | |_ _ __ 
-# | | |_ |/ _` | |/ _` \ \/ / | | |  ___/| |      |  _| '__|
-# | |__| | (_| | | (_| |>  <| |_| | |    | |____ _| | | |   
-#  \_____|\__,_|_|\__,_/_/\_\\__, |_|     \_____(_)_| |_|   
-#                             __/ |                         
-#                            |___/                          
-#${CEND}"
+echo "${CCYAN}${CEND}"
+echo "${CCYAN}   _____       _                  _____   _____    __      ${CEND}"
+echo "${CCYAN}  / ____|     | |                |  __ \ / ____|  / _|     ${CEND}"
+echo "${CCYAN} | |  __  __ _| | __ ___  ___   _| |__) | |      | |_ _ __ ${CEND}"
+echo "${CCYAN} | | |_ |/ _` | |/ _` \ \/ / | | |  ___/| |      |  _| '__|${CEND}"
+echo "${CCYAN} | |__| | (_| | | (_| |>  <| |_| | |    | |____ _| | | |   ${CEND}"
+echo "${CCYAN}  \_____|\__,_|_|\__,_/_/\_\\__, |_|     \_____(_)_| |_|   ${CEND}"
+echo "${CCYAN}                             __/ |                         ${CEND}"
+echo "${CCYAN}                            |___/                          ${CEND}"
 echo ""
-##########################################################
+echo "##########################################################"
 echo "${CGREEN}-> Téléchargement firewall.sh ${CEND}"
 echo ""
 wget --no-check-certificate https://raw.githubusercontent.com/GalaxyPC/DebianSRVDedibox/master/firewall.sh
