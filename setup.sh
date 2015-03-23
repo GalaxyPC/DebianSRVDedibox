@@ -44,7 +44,8 @@ smallLoader() {
 echo ""
 echo "${CCYAN}                          Configuration du script Firewall ${CEND}"
 echo ""
-echo "${CCYAN}#
+echo "${CRED}GALXAYPC.fr@Benjamin COLLEAU${CEND}"
+#echo "${CCYAN}
 #   _____       _                  _____   _____    __      
 #  / ____|     | |                |  __ \ / ____|  / _|     
 # | |  __  __ _| | __ ___  ___   _| |__) | |      | |_ _ __ 
